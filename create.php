@@ -24,8 +24,8 @@ $description = '';
 $price = '';
 $folderName = '';
 $imageName = '';
-
-$folderName = randomStr(5);
+$imagePath = '';
+$folderName = randomStr(8);
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -48,19 +48,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (empty($errors)) {
-        $image = $_FILES['image'] ?? null;
+        $image = $_FILES['image'];
         $imageName = $_FILES['image']['name'];
 
-        if ($image) {
+        if ($image && $imageName) {
             mkdir("./images/$folderName");
             move_uploaded_file($image['tmp_name'], "./images/$folderName/$imageName");
+            $imagePath = "./images/$folderName/$imageName";
+        } else {
+            $imagePath = null;
         }
 
         $statement = $pdo->prepare("INSERT INTO products (title, image, description, price, create_date)
         VALUES (:title, :image, :description, :price, :date )");
 
         $statement->bindValue(':title', $title);
-        $statement->bindValue(':image', "./images/$folderName/$imageName");
+        $statement->bindValue(':image', $imagePath);
         $statement->bindValue(':price', $price);
         $statement->bindValue(':description', $description);
         $statement->bindValue(':date', $date);
