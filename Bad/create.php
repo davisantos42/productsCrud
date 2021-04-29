@@ -14,7 +14,6 @@ function randomStr($n)
     return $string;
 }
 
-
 $errors = [];
 $title = '';
 $description = '';
@@ -23,7 +22,6 @@ $folderName = '';
 $imageName = '';
 $imagePath = '';
 $folderName = randomStr(8);
-
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -81,7 +79,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 
     <!-- My own app.css file -->
     <link rel="stylesheet" href="app.css">
@@ -91,32 +90,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
     <h1>Create new Product</h1>
-    <?php if (!empty($errors)) : ?>
-        <div class="alert alert-danger">
-            <?php foreach ($errors as $error) : ?>
-                <div><?php echo $error ?></div>
-            <?php endforeach; ?>
-        <?php endif; ?>
+
+    <p>
+        <a class="btn btn-outline-info" href="./index.php">Go back to Products</a>
+    </p>
+
+    <?php if (!empty($errors)): ?>
+    <div class="alert alert-danger">
+        <?php foreach ($errors as $error): ?>
+        <div><?php echo $error ?></div>
+        <?php endforeach;?>
+        <?php endif;?>
+    </div>
+    <form action="" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label class="form-label">Image</label>
+            <br> <input type="file" name="image">
         </div>
-        <form action="" method="post" enctype="multipart/form-data">
-            <div class="mb-3">
-                <label class="form-label">Image</label>
-                <br> <input type="file" name="image">
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Product Title</label>
-                <input type="text" class="form-control" name="title" value="<?php echo $title; ?>">
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Product Description</label>
-                <textarea class="form-control" name="description"><?php echo $description; ?></textarea>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Product Price</label>
-                <input type="number" step=".01" class="form-control" name="price" value="<?php echo $price; ?>">
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+        <div class="mb-3">
+            <label class="form-label">Product Title</label>
+            <input type="text" class="form-control" name="title" value="<?php echo $title; ?>">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Product Description</label>
+            <textarea class="form-control" name="description"><?php echo $description; ?></textarea>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Product Price</label>
+            <input type="number" step=".01" class="form-control" name="price" value="<?php echo $price; ?>">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 
 </body>
 
