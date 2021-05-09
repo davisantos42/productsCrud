@@ -4,32 +4,26 @@ namespace app;
 
 use app\Database;
 
-class Router
-{
-    public $getRoutes = [];
+class Router {
+    public $getRoutes  = [];
     public $postRoutes = [];
-    public $db;
+    public Database $db;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->db = new Database();
     }
 
-    public function get($url, $fn)
-    {
+    public function get($url, $fn) {
         $this->getRoutes[$url] = $fn;
-
     }
 
-    public function post($url, $fn)
-    {
+    public function post($url, $fn) {
         $this->postRoutes[$url] = $fn;
     }
 
-    public function resolve()
-    {
+    public function resolve() {
         $currentUrl = $_SERVER['PATH_INFO'] ?? '/';
-        $method = $_SERVER['REQUEST_METHOD'];
+        $method     = $_SERVER['REQUEST_METHOD'];
 
         if ($method === 'GET') {
             $fn = $this->getRoutes[$currentUrl] ?? null;
@@ -44,8 +38,7 @@ class Router
         }
     }
 
-    public function render($view, $params = [])
-    {
+    public function render($view, $params = []) {
         foreach ($params as $key => $value) {
             $$key = $value;
         }

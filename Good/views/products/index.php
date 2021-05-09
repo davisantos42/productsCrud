@@ -4,7 +4,7 @@
 
 <form action="">
     <div class="input-group mb-3">
-        <input value="<?php echo $search ?>" type="text" class="form-control" placeholder="Search for products"
+        <input value="<?php echo $search; ?>" type="text" class="form-control" placeholder="Search for products"
             name="search">
         <div class="input-group-append">
             <button class="btn btn-outline-secondary" type="submit">Search</button>
@@ -34,10 +34,10 @@
             <td><?php echo $product['price']; ?></td>
             <td><?php echo $product['create_date']; ?></td>
             <td>
-                <a href="./update.php?id=<?php echo $product['id'] ?>" class="btn btn-sm btn-outline-primary"> Edit
+                <a href="/products/update?id=<?php echo $product['id']; ?>" class="btn btn-sm btn-outline-primary"> Edit
                 </a>
-                <form style="display: inline-block;" action="./delete.php" method="post">
-                    <input type="hidden" name="id" value="<?php echo $product['id'] ?>">
+                <form style="display: inline-block;" action="/products/delete" method="post">
+                    <input type="hidden" name="id" value="<?php echo $product['id']; ?>">
                     <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
                 </form>
 
